@@ -1,8 +1,8 @@
 import array
 import random
 playernum = 6
-p1p = 0
-p2p = 0
+p1points = 0
+p2points = 0
 share = 3
 steal = 5
 playerorder = [0,1,2,3,4,5,6]
@@ -19,17 +19,17 @@ var23 = 0
 playerdefined = 0
 currentround = 1
 def rules():
-    global player1moves, player2moves, currentmove, p1p, p2p
+    global player1moves, player2moves, currentmove, p1points, p2points
     if(player1moves[currentmove] == share and player2moves[currentmove] == share):
-        p1p += share
-        p2p += share
+        p1points += share
+        p2points += share
     if(player1moves[currentmove] == steal and player2moves[currentmove] == share):
-        p1p += steal
+        p1points += steal
     if(player1moves[currentmove] == share and player2moves[currentmove] == steal):
-        p2p += steal
+        p2points += steal
     if(player1moves[currentmove] == steal and player2moves[currentmove] == steal):
-        p1p += 1
-        p2p += 1
+        p1points += 1
+        p2points += 1
 def p1verysmart():
     global player1moves, player2moves, var11, var12, var13
     if(currentmove != 1):
@@ -172,26 +172,26 @@ for i in range (0, len(pselect1)):
     for j in range (0, len(pselect2)):
         pselect1[i]()
         pselect2[j]()
-        append.score(p1p)
-        append.score(p2p)
-        p1p = 0
-        p2p = 0
+        append.score(p1points)
+        append.score(p2points)
+        p1points = 0
+        p2points = 0
         currentmove = 0
         player1moves = []
         player2moves = []
 while(currentround <= 6):
     while(gamelength >= 0):
         rules()
-        if(playerorder[currentround] == 4):
-            verysmart()
-        if(playerorder[currentround] == 2):
-            friendly()
-        if(playerorder[currentround] == 5):
-            sample()
         if(playerorder[currentround] == 1):
             forgiveness()
+        if(playerorder[currentround] == 2):
+            friendly()
         if(playerorder[currentround] == 3):
             othersample()
+        if(playerorder[currentround] == 4):
+            verysmart()
+        if(playerorder[currentround] == 5):
+            sample()
         gamelength = gamelength - 1
         currentmove = currentmove + 1
     currentround = currentround + 1
