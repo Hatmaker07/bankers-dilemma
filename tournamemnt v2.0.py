@@ -28,7 +28,7 @@ def rules():
     if(player1moves[currentmove] == STEAL and player2moves[currentmove] == STEAL):
         p1points += 1
         p2points += 1
-def p1verysmart():
+def verysmart():
     global player1moves, player2moves, var11, var12, var13
     if(currentmove != 1):
     #stops the forgiving part if they STEAL first
@@ -55,38 +55,9 @@ def p1verysmart():
             player1moves.append(SHARE)
         else:
             player1moves.append(SHARE)
-def p2verysmart():
-    global player1moves, player2moves, var21, var22, var23
-    if(currentmove != 1):
-        #stops the forgiving part if they STEAL first
-        for i in range (-5,0):
-            if(var21 == 0 and player2moves[i] == STEAL and player1moves[i] == SHARE):
-                var21 = -1
-            if(var21 == 0 and player2moves[i] == SHARE and player1moves[i] == STEAL):
-                var21 = 1
-        #stops the forgiving part if they STEAL for 3 moves straight
-        for i in range (0,3):
-            if(var22 != 3 and player1moves[currentmove - i] == STEAL):
-                var22 = var22 + 1
-            elif(var22 == 3):
-                var21 = 1
-        #after 5 moves, STEAL unless they STEAL
-        for i in range (0,5):
-            if(player1moves[currentmove-i] == SHARE):
-                var23 = var23 + 1
-            if(var23 == 5):
-                player2moves.append(STEAL)
-            var23 = 0
-            #Stops retaliation to retaliation
-        if(player1moves[currentmove - 1] == STEAL and player2moves[currentmove] == STEAL and var11 != 1):
-            player2moves.append(SHARE)
-        else:
-            player2moves.append(SHARE)
-def p1friendly():
+def friendly():
     player1moves.append(SHARE)
-def p2friendly():
-    player2moves.append(SHARE)
-def p1sample():
+def sample():
     global player2moves, currentmove, var11
     if(currentmove != 1):
         if(player2moves[currentmove] == SHARE):
@@ -102,20 +73,7 @@ def p1sample():
     else:
         #SHAREs on the 1st move
         player1moves.append(SHARE)
-def p2sample():
-        global player1moves, currentmove, var21
-        if(currentmove != 1):
-            if(player1moves[currentmove] == SHARE):
-                player2moves.append(SHARE)
-            else:
-                var21 = random.randint(1,10)
-                if(var21 != 1):
-                    player2moves.append(STEAL)
-                else:
-                    player2moves.append(SHARE)
-        else:
-            player2moves.append(SHARE)
-def p1othersample():
+def othersample():
     global var11, player2moves, currentmove, STEAL
     if(currentmove != 1):
         if(var11 != 1 and player2moves[currentmove] == STEAL):
@@ -126,18 +84,7 @@ def p1othersample():
             player1moves.append(SHARE)
     else:
         player1moves.append(SHARE)
-def p2othersample():
-    global var21, player1moves, currentmove, STEAL
-    if(currentmove != 1):
-        if(var21 != 1 and player1moves[currentmove] == STEAL):
-            var21 = 1
-        if(var21 == 1):
-            player2moves.append(STEAL)
-        else:
-            player2moves.append(SHARE)
-    else:
-        player2moves.append(SHARE)
-def p1forgiveness():
+def forgiveness():
     global player2moves, var11, currentmove
     if(currentmove != 1):
         if(player2moves[currentmove] == STEAL):
@@ -150,19 +97,8 @@ def p1forgiveness():
             player1moves.append(SHARE)
     else:
         player1moves.append(SHARE)
-def p2forgiveness():
-    global player1moves, var21, currentmove
-    if(currentmove != 1):
-        if(player1moves[currentmove] == STEAL):
-            var21 = 1
-        if(player1moves[currentmove] == SHARE):
-            var21 = 0
-        if(var21 == 1):
-            player2moves.append(STEAL)
-        else:
-            player2moves.append(SHARE)
-    else:
-        player2moves.append(SHARE)
+#for loop to add score to an array for further proccessing
+#scores for player 1 are in even numbered indexes, player 2 
 pselect1 = []
 pselect2 = []
 score = []
@@ -203,4 +139,5 @@ print("      \         /")
 print("        ------- ")
 print("=======================")
 #points are printed here
+
 
