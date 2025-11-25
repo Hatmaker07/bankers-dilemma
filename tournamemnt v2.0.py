@@ -28,6 +28,9 @@ def rules():
     if(player1moves[currentmove] == STEAL and player2moves[currentmove] == STEAL):
         p1points += 1
         p2points += 1
+        var11 = 0
+        var12 = 0
+        var13 = 0
 def verysmart():
     global player1moves, player2moves, var11, var12, var13
     if(currentmove != 1):
@@ -139,5 +142,6 @@ print("      \         /")
 print("        ------- ")
 print("=======================")
 #points are printed here
+
 
 
